@@ -1,0 +1,440 @@
+
+.container {
+    z-index: 2;
+    position: fixed;
+    top:0px;
+    min-height: 60px;
+    max-height: 10vh;
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #1e3139;
+}
+.red-child{
+    display: flex;
+    flex: 1;
+    height: 75px;
+    width: 100vw;
+    color: #eac580;
+    background-color:#1e3139;
+}
+.kasiagamestext{
+    display: flex;
+    height: 60px;
+    width: 800px;
+    image-rendering: pixelated;
+    background: url(image/kasiaGamesText.png);
+    background-size: cover;
+}
+.container0 {
+    z-index: 2;
+    position: sticky;
+    top:0px;
+    min-height: 60px;
+    max-height: 10vh;
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #1e3139;
+}
+.red-child0{
+    display: flex;
+    flex: 1;
+    height: 75px;
+    width: 100vw;
+    color: #eac580;
+    background-image:linear-gradient (#1e3139, #1e3139)
+}
+.kasiagamestext0{
+    display: flex;
+    height: 60px;
+    width: 800px;
+    image-rendering: pixelated;
+    background: url(image/kasiaGamesText.png);
+    background-size: cover;
+}
+.container1 {
+    height: 50px;
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: flex-start;
+    background-color: #1e3139;
+}
+.red-child2{
+    display: flex;
+    height: 50px;
+    width: 20px;
+    background-color: #1e3139;
+}
+.red-child-3{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    vertical-align: top;
+    align-content: center;
+    height: 50px;
+    width: 10vw;
+    min-width: 75px;
+    color: #8a2223;
+    font-size-adjust: auto;
+    justify-content: center;
+    background-color: #b94545;
+}
+.red-child-3:hover{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    align-content: center;
+    height: 50px;
+    width: 10vw;
+    min-width: 75px;
+    color: #8a2223;
+    font-size-adjust: auto;
+    transition-duration: 0.6s;
+    justify-content: center;
+    background-color: #086880;
+    transform: scaleX(1.05);
+}
+.red-child-4{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    vertical-align: top;
+    align-content: center;
+    height: 50px;
+    width: 10vw;
+    min-width: 75px;
+    color: #8a2223;
+    font-size-adjust: auto;
+    justify-content: center;
+    background-color: #b94545;
+}
+.red-child-5{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    vertical-align: top;
+    align-content: center;
+    height: 50px;
+    width: 200px;
+    color: #8a2223;
+    font-size-adjust: auto;
+    justify-content: center;
+    background-color: #b94545;
+}
+.red-child-5:hover{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    align-content: center;
+    height: 50px;
+    width: 200px;
+    color: #8a2223;
+    font-size-adjust: auto;
+    transition-duration: 0.6s;
+    justify-content: center;
+    background-color: #086880;
+    transform: scaleX(1.05);
+}
+.midnightblue-child{
+    top: 50px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    display: flex;
+    align-content: center;
+    width: 10vw;
+    min-width: 75px;
+    color: #eac580;
+    font-size-adjust: auto;
+    justify-content: center;
+    background-color: #eac580;
+}
+.midnightblue-child-2{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    display: flex;
+    align-content: center;
+    height: 50px;
+    width: 50vw;
+    min-width: 75px;
+    color: #eac580;
+    font-size-adjust: auto;
+    justify-content: center;
+    background-color: midnightblue;
+}
+.steelblue-child{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    display: flex;
+    align-content: center;
+    height: 50px;
+    width: 10vw;
+    min-width: 75px;
+    font-size-adjust: auto;
+    justify-content: center;
+    background-color: #b94545;
+}
+.steelblue-child:hover{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    display: flex;
+    align-content: center;
+    height: 50px;
+    width: 10vw;
+    min-width: 75px;
+    font-size-adjust: auto;
+    justify-content: center;
+    transition-duration: 0.6s;
+    background-color: #086880;
+    transform: scaleX(1.05);
+}
+.steelblue-child-2{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    display: flex;
+    align-content: center;
+    height: 50px;
+    width: 50vw;
+    min-width: 75px;
+    font-size-adjust: auto;
+    justify-content: center;
+    background-color: #b94545;
+}
+.steelblue-child-2:hover{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    display: flex;
+    align-content: center;
+    height: 50px;
+    width: 50vw;
+    min-width: 75px;
+    font-size-adjust: auto;
+    justify-content: center;
+    transition-duration: 0.6s;
+    background-color: #086880;
+    transform: scaleX(1.05);
+}
+.container2 {
+    height: auto;
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: flex-start;
+    background-color: ##1e3139;
+}
+.midnightblue-child2{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    height: auto;
+    width: 90vw;
+    color: #eac580;
+    background-color: #eac580;     
+}
+.midnightblue-child3{
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    height: 25px;
+    width: 90vw;
+    background-color: #eac580; 
+}
+.midnightblue-child4{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    height: auto;
+    width: 90vw;
+    color: #eac580;
+    background-color: #8a2223;     
+}
+.midnightblue-child5{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    height: auto;
+    width: 90vw;
+    color: #8a2223;
+    background-color: #8a2223;     
+}
+.white-child{
+    display: flex;
+    height: 35vw;
+    width: 35vw;
+    max-height: 200px;
+    max-width: 200px;
+    background-color: ghostwhite;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+#a0 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background: url(textures/crystal%20coin%20texture.png);
+    background-size: contain;
+    width: 35vw;
+    height: 35vw;
+    max-height: 200px;
+    max-width: 200px;
+}
+#a1 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background: url(textures/Crystal-Coin-5.png);
+    background-size: contain;
+    width: 35vw;
+    height: 35vw;
+    max-height: 200px;
+    max-width: 200px;
+}
+#a2 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/Crystal-Coin-10.png);
+    background-size: contain;
+    width: 35vw;
+    height: 35vw;
+    max-height: 200px;
+    max-width: 200px;
+}
+#a3 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/Crystal-Coin-15.png);
+    background-size: contain;
+    width: 35vw;
+    height: 35vw;
+    max-height: 200px;
+    max-width: 200px;
+}
+#a4 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/Crystal-coin-30.png);
+    background-size: contain;
+    width: 35vw;
+    height: 35vw;
+    max-height: 200px;
+    max-width: 200px;
+}
+#a5 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(image/LevelGenGrid5.png);
+    background-size: contain;
+    width: 35vw;
+    height: 35vw;
+    max-height: 200px;
+    max-width: 200px;
+}
+#a6 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(image/levelGenGrid6.png);
+    background-size: contain;
+    width: 35vw;
+    height: 35vw;
+    max-height: 200px;
+    max-width: 200px;
+}
+#a7 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background: url(image/levelGenGrid7.png);
+    background-size: contain;
+    width: 35vw;
+    height: 35vw;
+    max-height: 200px;
+    max-width: 200px;
+}
+#a8 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(image/levelGenGrid8.png);
+    background-size: contain;
+    width: 35vw;
+    height: 35vw;
+    max-height: 200px;
+    max-width: 200px;
+}
+#a9 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(image/levelGenGrid9.png);
+    background-size: contain;
+    width: 35vw;
+    height: 35vw;
+    max-height: 200px;
+    max-width: 200px;
+}
+.white-child-2{
+    display: flex;
+    flex-direction: row;
+    height: 150px;
+    width: 150px;
+    background-color: #eac580;
+}

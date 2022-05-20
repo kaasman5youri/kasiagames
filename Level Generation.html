@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>kasia games</title>
+<link href ="levelgenbase.css" rel="stylesheet">
+</head>
+<style>
+body {
+    background-size: cover;
+    background-color: #1e3139;
+}
+</style>
+<nav>
+<ul>
+<div class="container">
+<div class="child red-child">
+<h1> </h1>
+</div>
+</div>
+<div class="container0">
+<div class="child red-child0">
+<div class="kasiagamestext0">
+<h1> </h1>
+</div>
+</div>
+</div>
+<div class="container1">
+<div class="red-child2">
+</div>
+<div class="steelblue-child">
+<a href='menu.html' style="color: #eac580"><h1>home</h1></a>
+</div>
+<div class="steelblue-child">
+<a href='games.html' style="color: #eac580"><h1> games</h1></a>
+</div>
+<div class="steelblue-child">
+<a href='https://www.kaas.nl/' style="color: #eac580"><h1> kaas.nl</h1></a>
+</div>
+<div class="steelblue-child-2">
+<a href='soulbreaker.html' style="color: #eac580"><h1>soulbreaker informatica opdracht vwo 5 p1 p2</h1></a>
+</div>
+</div>
+<div class="container2">
+<div class="midnightblue-child4">
+<h1 style="font-size:30px;">Level generatie
+<br><br>Waarom we hebben gekozen voor level generatie?<p style="font-size:20px;">We hebben gekozen voor level generatie omdat we wouden dat je bijna nooit hetzelfde tegenkomt als je het spel speelt.</p><br><h2 style="font-size:30px;">Hoe werkt de level generatie?</h2><p style="font-size:20px;">Bij de level generatie worden waardes in een 3d array aangepast. In deze uitleg gebruik ik een grid om de generatie uit te leggen. De generatie start in het midden van de grid.</p>
+</h1>
+<div class="white-child">
+<img id="a0">
+</div>
+<p style="font-size:20px;">Dan wordt er een wilekeurige richting gekozen en beweegt hij 1 vakje. Ook krijgt het vakje waar hij vandaan kwam vier waardes die bapalen hoe de kamer eruit ziet.</p>
+<div class="white-child">
+<img id="a1">
+</div>
+<p style="font-size:20px;">Dit wordt een paar keer herhaald. Een variabele bepaalt hoe vaak het wordt herhaald.</p>
+<div class="white-child">
+<img id="a2">
+</div>
+<p style="font-size:20px;">Op de buitenste rand kan geen kamer worden gegenereerd. Ik leg later uit waarom dat zo is. Als hij daar wel een kamer probeert te generen gaat hij een vakje terug.</p>
+<div class="white-child">
+<img id="a3">
+</div>
+<p style="font-size:20px;">Na het genereren van de locaties van de kamers en de soorten kamers wordt de kamer in het midden van de grid veranderd in de start kamer. De start kamer heeft andere waardes dan de rest om te zorgen dat het er altijd hetzelfde er uit ziet.</p>
+<div class="white-child">
+<img id="a4">
+</div>
+<p style="font-size:20px;">Daarna wordt de inrichting van de kamers gegenereerd. Voor het genereren van de inrichting worden vier 3d arrays gebruikt. Er is een array voor de muren en vloeren, voor vallen die op de grond komen, voor vallen die op de muur komen en voor vijanden. Ook zijn er van elk soort voorwerp verschillende soorten van de muren is er bijvoorbeeld een jungle muur en een stenen muur. In die arrays staan plattegronden voor hoe de kamer eruit moet zien. Ook wordt er gekeken of bepaalde voorwerpen wel op die locatie kunnen staan. Zo kunnen vijanden bijvoorbeeld alleen op de vloer worden geplaatst. Ik heb gekozen voor vier arrays omdat dat zorgt voor meer verschillende kamers voor een kleinere hoeveelheid plattegronden dan terein generatie die een array gebruikt. Hieronder kan je zien hoe de verschillende lagen op elkaar komen te liggen.</p>
+<div class="midnightblue-child5">
+<div class="white-child">
+<img id="a5">
+</div>
+<div class="white-child">
+<img id="a6">
+</div>
+<div class="white-child">
+<img id="a7">
+</div>
+<div class="white-child">
+<img id="a8">
+</div>
+</div>
+<p style="font-size:20px;">Na het genereren van de inrichting van de kamers worden de buitenste muren gegenereerd. Tijdens het genereren van de buitenste muren controleert elke kamer of er een kamer naast staat. Aan de kant waar geen kamers staat genereert hij een muur. Er wordt ook gekeken of daar al muren staan. Dit is ook de reden waarom er geen kamers op het gele gebied kunnen genereren. Als dat wel gebeurde dan kreeg ik een index out of range error. </p>
+<div class="white-child">
+<img id="a9">
+</div>
+<p style="font-size:20px;">Hieronder kan je met een video zien hoe het werkt in de game.</p>
+<video width="480" height="320" controls>
+<source src="videos/levelGenInGame.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<div class="midnightblue-child5">
+<div class="red-child-3">
+<a href='soulbreaker.html' style="color: #eac580"><h1>terug</h1></a>
+</div>
+<div class="red-child-3">
+<a href='Intro.html' style="color: #eac580"><h1>intro</h1></a>
+</div>
+<div class="red-child-3">
+<a href='Enemies.html' style="color: #eac580"><h1>vijanden</h1></a>
+</div>
+</div>
+</div>
+</div>
+</ul>
+</nav> 
+</body>
+</html>

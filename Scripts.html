@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>kasia games</title>
+<link href ="scriptbase.css" rel="stylesheet">
+</head>
+<style>
+body {
+    background-size: cover;
+    background-color: #1e3139;
+}
+</style>
+<nav>
+<ul>
+<div class="container">
+<div class="child red-child">
+<h1> </h1>
+</div>
+</div>
+<div class="container0">
+<div class="child red-child0">
+<div class="kasiagamestext0">
+<h1> </h1>
+</div>
+</div>
+</div>
+<div class="container1">
+<div class="red-child2">
+</div>
+<div class="steelblue-child">
+<a href='menu.html' style="color: #eac580"><h1>menu</h1></a>
+</div>
+<div class="steelblue-child">
+<a href='games.html' style="color: #eac580"><h1> games</h1></a>
+</div>
+<div class="steelblue-child">
+<a href='https://www.kaas.nl/' style="color: #eac580"><h1> kaas.nl</h1></a>
+</div>
+<div class="steelblue-child-2">
+<a href='soulbreaker.html' style="color: #eac580"><h1>soulbreaker informatica project vwo year 5 </h1></a>
+</div>
+</div>
+<div class="container2">
+<div class="midnightblue-child4">
+<h1>Hieronder staan de scripts. Ze staan ook in de folder update scripts</h1>
+<div class="skyblue-child"><h1>enemyPathfinding</h1><p style="font-size: 20px;">using System.Collections;<br>
+using System.Collections.Generic;<br>
+using UnityEngine;<br>
+<br>
+public class enemyPathfinding : MonoBehaviour<br>
+{<br>
+    public int enemySpeed;<br>
+    public int detectDistance;<br>
+    float deltaPosX;<br>
+    float deltaPosZ;<br>
+    // Start is called before the first frame update<br>
+    void Start()<br>
+    {<br>
+       <br> 
+    }<br>
+<br>
+    // Update is called once per frame<br>
+    void Update()<br>
+    {<br>
+// dit zorgt dat de vijanden geen colission hebben met muren zodat ze <br>
+// niet vast komen te zitten bij een hoek van een muur dit is een bug<br>
+// die ik later ga oplossen<br>
+        int layerMask = 1 << 8;<br>
+<br>
+	// zoekt naar een object met de naam speler en berekent de afstand<br>
+// tussen de speler en de vijand<br>
+        GameObject Player = GameObject.Find("player");<br>
+        deltaPosX = transform.position.x - Player.transform.position.x;<br>
+        deltaPosZ = transform.position.z - Player.transform.position.z;<br>
+
+	// bij de code van pickles was een read me die zij hoe je de code kon<br>
+// gebruiken hieronder staat hoe ik denk dat het werkt<br>
+        if (deltaPosX > -detectDistance && deltaPosX < detectDistance && deltaPosZ + 5 > -detectDistance && deltaPosZ < detectDistance && float.IsNaN(FlowFieldProvider.GetVector(transform.position).x) == false && float.IsNaN(FlowFieldProvider.GetVector(transform.position).y) == false && float.IsNaN(FlowFieldProvider.GetVector(transform.position).z) == false)<br>
+        {<br>
+<br>
+	// gebruikt de positie van de vijand om een vector 3 van de<br>
+// flowfieldprovider in de variabele direction te laden<br>
+            Vector3 direction = FlowFieldProvider.GetVector(transform.position);<br>
+<br>
+	// controleert op colissions hij negeert de colissions met de muren<br>
+// (anders is er een bug)<br>
+	// en zorgt ervoor dat vijanden, pets en de speler niet op dezelfde<br>
+// locatie staan zodat je kan zien dat er meerdere vijanden staan<br>
+            if (!Physics.Raycast(transform.position, direction, enemySpeed * Time.deltaTime + 5, layerMask))<br>
+            {<br>
+<br>
+	// vermenigvuldigt de waarde van directie met de snelheid en telt dat<br>
+// bij de positie van de vijand op<br>
+                transform.position = transform.position + direction * enemySpeed / 10;<br>
+            }<br>
+        }<br>
+    }<br>
+}<br>
+<br>
+</p></div><br>
+<div class="skyblue-child"><h1>floor1GenScript</h1><p style="font-size: 20px;">using System.Collections;<br>
+using System.Collections.Generic;<br>
+using UnityEngine;<br>
+//using static terainGenScript;<br>
+<br>
+<br>
+public class floor1GenScript : MonoBehaviour<br>
+{<br>
+//list lengt<br>
+//de hoeveelheid floer en muur tiles die in de lijst zitten<br>
+int f;<br>
+int w;<br>
+<br>
+//object lists <br>
+//hier worden de objecten in geladen<br>
+public List<GameObject> floorTiles;<br>
+public List<GameObject> wallTiles;<br>
+public List<GameObject> floorTraps;<br>
+public List<GameObject> wallTraps;<br>
+public List<GameObject> enemie;<br>
+<br>
+//GenGrid nummer dingen<br>
+//de breedte en hoogte van een block<br>
+[SerializeField]<br>
+public float tileHeight = 16;<br>
+[SerializeField]<br>
+public float tileWidth = 16;<br>
+<br>
+<br>
+//GenRoom nummer dingen<br>
+[SerializeField]<br>
+private bool genRooms = false;<br>
+[SerializeField]<br>
+//hoe vaak de code een kamer probeert te genereren <br>
+private int roomGenTrys = 10;<br>
+//de X en Z coordinaten van de kamer die wordt gegenereerd<br>
+private float roomZ;<br>
+private float roomX;<br>
+//de X en Z coordinaten van de kamer die daarvoor was gegenereerd<br>
+private float roomXold = 4;<br>
+private float roomZold = 4;<br>
+<br>
+//startTile word niet meer gebruikt<br>
+//private bool startTile = false;<br>
+//private int RoomNummer = 0;<br>
+<br>
+//hoe moeilijk de kamers zijn<br>
+[SerializeField]<br>
+private int difficulty = 0;<br>
+<br>
+<br>
+//GenGrid nummer dingen<br>
+private int[,] grid;<br>
+private pathfindingScript PathfindingScript;<br>
+<br>
+<br>
+<br>
+// Start is called before the first frame update<br>
+void Awake()<br>
+{<br>
+if (genRooms == true)<br>
+{<br>
+//GenRoom functie<br>
+GenRoom();<br>
+}<br>
+}<br>
+<br>
+<br>
+public void GenRoom()<br>
+{<br>
+//laad een object<br>
+PathfindingScript = GameObject.FindObjectOfType<pathfindingScript>();<br>
+//laad objecten uit folders en doet ze in een lijst<br>
+floorTiles = new List<GameObject>(Resources.LoadAll<GameObject>("FloorTiles"));<br>
+wallTiles = new List<GameObject>(Resources.LoadAll<GameObject>("WallTiles"));<br>
+floorTraps = new List<GameObject>(Resources.LoadAll<GameObject>("FloorTraps"));<br>
+wallTraps = new List<GameObject>(Resources.LoadAll<GameObject>("WallTraps"));<br>
+enemie = new List<GameObject>(Resources.LoadAll<GameObject>("Enemies"));<br>
+f = floorTiles.Count;<br>
+w = wallTiles.Count;<br>
+<br>
+<br>
+<br>
+//room types<br>
+//dit is een array met de locatie van muren en en vloeren in een kamer<br>
+int[,,] roomTypeVariation = new int[,,]<br>
+{<br>
+{<br>
+//room 0 wordt niet gebruikt<br>
+{1+f, 1+f, 1+f, 1+f, 1+f, 1+f, 1+f, 1 , 1 , 1+f, 1+f, 1+f, 1+f, 1+f, 1+f, 1+f}, //1<br>
+{1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f}, //2<br>
+{1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f}, //3<br>
+{1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f}, //4<br>
+{1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f}, //5<br>
+{1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f}, //6<br>
+{1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f}, //7<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 }, //8<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 }, //9<br>
+{1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f}, //10<br>
+{1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f}, //11<br>
+{1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f}, //12<br>
+{1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f}, //13<br>
+{1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f}, //14<br>
+{1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f}, //15<br>
+{1+f, 1+f, 1+f, 1+f, 1+f, +f , 1+f, 1 , 1 , 1+f, 1+f, 1+f, 1+f, 1+f, 1+f, 1+f} //16<br>
+},<br>
+//room 1 (spawn room)<br>
+{<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 }, //1<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 }, //2<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 }, //3<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 }, //4<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 }, //5<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 }, //6<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 }, //7<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 }, //8<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 }, //9<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 }, //10<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 }, //11<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 }, //12<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 }, //13<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 }, //14<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 }, //15<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 } //16<br>
+},<br>
+//room 2<br>
+{<br>
+{1+f, 1+f, 1+f, 1+f, 1+f, 1+f, 1+f, 1 , 1 , 1+f, 1+f, 1+f, 1+f, 1+f, 1+f, 1+f}, //1<br>
+{1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f}, //2<br>
+{1+f, 1 , 1+f, 1+f, 1+f, 1+f, 1+f, 1 , 1 , 1+f, 1+f, 1+f, 1+f, 1+f, 1 , 1+f}, //3<br>
+{1+f, 1 , 1+f, 2 , 2 , 2 , 1+f, 1 , 1 , 1+f, 2 , 2 , 2 , 1+f, 1 , 1+f}, //4<br>
+{1+f, 1 , 1+f, 2 , 2 , 2 , 2 , 1 , 1 , 2 , 2 , 2 , 2 , 1+f, 1 , 1+f}, //5<br>
+{1+f, 1 , 1+f, 2 , 2 , 2 , 2 , 1 , 1 , 2 , 2 , 2 , 2 , 1+f, 1 , 1+f}, //6<br>
+{1+f, 1 , 1+f, 2 , 2 , 2 , 1+f, 1 , 1 , 1+f, 2 , 2 , 2 , 1+f, 1 , 1+f}, //7<br>
+{1 , 1 , 2 , 2 , 2 , 2 , 1+f, 1 , 1 , 1+f, 2 , 2 , 2 , 2 , 1 , 1 }, //8<br>
+{1 , 1 , 2 , 2 , 2 , 2 , 1+f, 1 , 1 , 1+f, 2 , 2 , 2 , 2 , 1 , 1 }, //9<br>
+{1+f, 1 , 1+f, 2 , 2 , 2 , 1+f, 1 , 1 , 1+f, 2 , 2 , 2 , 1+f, 1 , 1+f}, //10<br>
+{1+f, 1 , 1+f, 2 , 2 , 2 , 2 , 1 , 1 , 2 , 2 , 2 , 2 , 1+f, 1 , 1+f}, //11<br>
+{1+f, 1 , 1+f, 2 , 2 , 2 , 2 , 1 , 1 , 2 , 2 , 2 , 2 , 1+f, 1 , 1+f}, //12<br>
+{1+f, 1 , 1+f, 2 , 2 , 2 , 1+f, 1 , 1 , 1+f, 2 , 2 , 2 , 1+f, 1 , 1+f}, //13<br>
+{1+f, 1 , 1+f, 1+f, 1+f, 1+f, 1+f, 1 , 1 , 1+f, 1+f, 1+f, 1+f, 1+f, 1 , 1+f}, //14<br>
+{1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f}, //15<br>
+{1+f, 1+f, 1+f, 1+f, 1+f, 1+f, 1+f, 1 , 1 , 1+f, 1+f, 1+f, 1+f, 1+f, 1+f, 1+f} //16<br>
+},<br>
+//room 3<br>
+{<br>
+{1+f, 1+f, 1+f, 1+f, 1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1+f, 1+f, 1+f, 1+f, 1+f}, //1<br>
+{1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f}, //2<br>
+{1+f, 1 , 1+f, 1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f}, //3<br>
+{1+f, 1 , 1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f}, //4<br>
+{1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f}, //5<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 }, //6<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1+f, 1+f, 1+f, 1+f, 1 , 1 , 1 , 1 , 1 , 1 }, //7<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1+f, 1+f, 1+f, 1+f, 1 , 1 , 1 , 1 , 1 , 1 }, //8<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1+f, 1+f, 1+f, 1+f, 1 , 1 , 1 , 1 , 1 , 1 }, //9<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1+f, 1+f, 1+f, 1+f, 1 , 1 , 1 , 1 , 1 , 1 }, //10<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 }, //11<br>
+{1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f}, //12<br>
+{1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f, 1 , 1+f}, //13<br>
+{1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f, 1+f, 1 , 1+f}, //14<br>
+{1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f}, //15<br>
+{1+f, 1+f, 1+f, 1+f, 1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1+f, 1+f, 1+f, 1+f, 1+f} //16<br>
+}<br>
+};<br>
+<br>
+<br>
+<br>
+//roomtypes floortraps<br>
+//dit is een array met de locaties van traps die op de vloer liggen in een kamer<br>
+int[,,] floorTrapsVariation = new int[,,]<br>
+{<br>
+{<br>
+//room 0 wordt niet gebruikt<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //1<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //2<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //3<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //4<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //5<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //6<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //7<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //8<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //9<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //10<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //11<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //12<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //13<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //14<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //15<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 } //16<br>
+},<br>
+//room 1 (spawn room)<br>
+{<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //1<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //2<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //3<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //4<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //5<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //6<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //7<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //8<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //9<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //10<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //11<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //12<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //13<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //14<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //15<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 } //16<br>
+},<br>
+//room 2<br>
+{<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //1<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //2<br>
+{0 , 0 , 1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //3<br>
+{0 , 0 , 1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //4<br>
+{0 , 0 , 1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //5<br>
+{0 , 0 , 1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //6<br>
+{0 , 0 , 1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //7<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //8<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //9<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //10<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //11<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //12<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //13<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //14<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //15<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 } //16<br>
+},<br>
+//room 3<br>
+{<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //1<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //2<br>
+{0 , 0 , 0 , 0 , 1 , 1 , 1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //3<br>
+{0 , 0 , 0 , 0 , 1 , 1 , 1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //4<br>
+{0 , 0 , 0 , 0 , 1 , 1 , 1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //5<br>
+{0 , 0 , 0 , 0 , 1 , 1 , 1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //6<br>
+{0 , 0 , 0 , 0 , 1 , 1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //7<br>
+{0 , 0 , 0 , 0 , 1 , 1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //8<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //9<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //10<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //11<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //12<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //13<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //14<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //15<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 } //16<br>
+}<br>
+};<br>
+<br>
+<br>
+<br>
+//roomtypes wall traps<br>
+//dit is een array met de locaties van traps die op muren komen in een kamer<br>
+int[,,] wallTrapsVariation = new int[,,]<br>
+{<br>
+{<br>
+//room 0 wordt niet gebruikt
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //1<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //2<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //3<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //4<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //5<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //6<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //7<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //8<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //9<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //10<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //11<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //12<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //13<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //14<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //15<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 } //16<br>
+},<br>
+//room 1 (spawn room)<br>
+{<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //1<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //2<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //3<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //4<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //5<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //6<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //7<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //8<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //9<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //10<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //11<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //12<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //13<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //14<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //15<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 } //16<br>
+},<br>
+//room 2<br>
+{<br>
+{1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //1<br>
+{1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //2<br>
+{1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //3<br>
+{1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //4<br>
+{1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //5<br>
+{1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //6<br>
+{1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //7<br>
+{1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //8<br>
+{1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //9<br>
+{1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //10<br>
+{1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //11<br>
+{1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //12<br>
+{1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //13<br>
+{1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //14<br>
+{1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //15<br>
+{1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 } //16<br>
+},<br>
+//room 3<br>
+{<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //1<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //2<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //3<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //4<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //5<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //6<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //7<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //8<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //9<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //10<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //11<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //12<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //13<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //14<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //15<br>
+{1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 } //16<br>
+}<br>
+};<br>
+<br>
+<br>
+<br>
+//dit is een array met de locaties van vijanden in een kamer<br>
+int[,,] enemieVariation = new int[,,]<br>
+{<br>
+{<br>
+//room 0 wordt niet gebruikt
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //1<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //2<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //3<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //4<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //5<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //6<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //7<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //8<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //9<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //10<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //11<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //12<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //13<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //14<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //15<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 } //16<br>
+},<br>
+//room 1 (spawn room)<br>
+{<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //1<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //2<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //3<br>
+{0 , 0 , 0 , 1 , 0 , 1 , 0 , 1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //4<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //5<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //6<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //7<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //8<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //9<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //10<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //11<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //12<br>
+{0 , 0 , 0 , 1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //13<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //14<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //15<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 } //16<br>
+},<br>
+//room 2<br>
+{<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //1<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //2<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //3<br>
+{0 , 0 , 0 , 1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 , 0 , 0 , 0 }, //4<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //5<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //6<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //7<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //8<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //9<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //10<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //11<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //12<br>
+{0 , 0 , 0 , 1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 , 0 , 0 , 0 }, //13<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //14<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //15<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 } //16<br>
+},<br>
+//room 3<br>
+{<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //1<br>
+{0 , 1 , 1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //2<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //3<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //4<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //5<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //6<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //7<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //8<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //9<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //10<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //11<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //12<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //13<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //14<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }, //15<br>
+{0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 } //16<br>
+}<br>
+};<br>
+int[,,] grid = new int[,,]<br>
+{<br>
+//room locations<br>
+// dit is een array met de locaties van kamers en de soort kamers<br>
+{{0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }},//1<br>
+{{0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }},//3<br>
+{{0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }},//4<br>
+{{0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }},//5<br>
+{{0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }},//6<br>
+{{0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }},//7<br>
+{{0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }},//8<br>
+{{0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }},//9<br>
+{{0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }},//10<br>
+{{0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }, {0, 0, 0, 0 }}//11<br>
+};<br>
+<br>
+<br>
+//room location code<br>
+//dit is een for loop die kamers probeert te generen<br>
+for (int trys = 0; trys < roomGenTrys; trys++)<br>
+{<br>
+//bij het genereren van kamers begint de code in het midden van een grid<br>
+//daarna bepaalt de float direction of hij zich een vakje verplaats op de X ass  of een een vakje op de Z ass<br>
+//als hij rand van de grid komt beweegt hij van de rand af<br>
+float direction = UnityEngine.Random.Range(-1, 2);<br>
+if (direction < 0 && roomX > 2 && roomX < 8)<br>
+{<br>
+//hier wordt gekozen of hij naar links of naar rechts beweegt<br>
+roomX = roomXold + UnityEngine.Random.Range(-1, 2);<br>
+roomZ = roomZold;<br>
+roomXold = roomX;<br>
+}<br>
+if (direction < 0 && roomX < 2)<br>
+{<br>
+roomX = roomXold + 1;<br>
+roomZ = roomZold;<br>
+roomXold = roomX;<br>
+}<br>
+if (direction < 0 && roomX > 7)<br>
+{<br>
+roomX = roomXold - 1;<br>
+roomZ = roomZold;<br>
+roomXold = roomX;<br>
+}<br>
+if (direction > 0 && roomZ > 2 && roomZ < 8)<br>
+{<br>
+//hier wordt gekozen of hij naar boven of naar beneden gaat<br>
+roomZ = roomZold + UnityEngine.Random.Range(-1, 2);<br>
+roomX = roomXold;<br>
+roomZold = roomZ;<br>
+}<br>
+if (direction > 0 && roomZ < 2)<br>
+{<br>
+roomZ = roomZold + 1;<br>
+roomX = roomXold;<br>
+roomZold = roomZ;<br>
+}<br>
+if (direction > 0 && roomZ > 7)<br>
+{<br>
+roomZ = roomZold - 1;<br>
+roomX = roomXold;<br>
+roomZold = roomZ;<br>
+}<br>
+//room type randomizer<br>
+//hier zet hij op de locatie waar hij in het grid staat een kamer en bepaalt hij hoe de kamer eruit ziet hij geeft die locatie<br>
+//een nummer voor welke plattegrond er moet worden gebruikt voor de muren, vloeren, trap, en vijanden<br>
+grid[System.Convert.ToInt32(roomZ), System.Convert.ToInt32(roomX), 0] = UnityEngine.Random.Range(2, 4);<br>
+grid[System.Convert.ToInt32(roomZ), System.Convert.ToInt32(roomX), 1] = UnityEngine.Random.Range(1, 4) + difficulty;<br>
+grid[System.Convert.ToInt32(roomZ), System.Convert.ToInt32(roomX), 2] = UnityEngine.Random.Range(1, 4) + difficulty;<br>
+grid[System.Convert.ToInt32(roomZ), System.Convert.ToInt32(roomX), 3] = UnityEngine.Random.Range(1, 4) + difficulty;<br>
+}<br>
+//spawn<br>
+// dit zorgt dat de spawn locatie de goeie plattegrond krijgt<br>
+grid[4, 4, 0] = 1;<br>
+grid[4, 4, 1] = 0;<br>
+grid[4, 4, 2] = 0;<br>
+grid[4, 4, 3] = 0;<br>
+<br>
+<br>
+//this fixed a bug<br>
+grid[0, 0, 0] = 0;<br>
+<br>
+<br>
+//room maker<br>
+//dit is een for loop die kijkt bij elke positie in de kamer array of daar een kamer moet staan en welke kamer<br>
+for (int z = 0; z < grid.GetLength(0) - 1; z++)<br>
+{<br>
+for (int x = 0; x < grid.GetLength(1) - 1; x++)<br>
+{<br>
+if (grid[x, z, 0] > 0)<br>
+{<br>
+//if (startTile == true)<br>
+//{<br>
+<br>
+<br>
+//}<br>
+//door and start location<br>
+//if (startTile == false)<br>
+//{<br>
+//startTile = true;<br>
+//}<br>
+//side walls<br>
+//dit kijkt of er naast een kamer geen andere kamer staat en zet muren aan de kant waar geen andere kamer staat<br>
+//kijkt naar de Z ass<br>
+if (x < 9 && x > 0 && z < 9 && z > 0 && grid[x - 1, z, 0] < 1)<br>
+{<br>
+for(int zLeft = 0; zLeft < 16; zLeft++)<br>
+{<br>
+if (roomTypeVariation[grid[x, z, 0], 0, zLeft] > 0 && roomTypeVariation[grid[x, z, 0], 0, zLeft] < f)<br>
+{<br>
+//laad muren uit de lijst<br>
+Instantiate(wallTiles[1], new Vector3((0 * 8 + x * 128 - 12)*2, 0, (zLeft * -8 + z * -128 + 1012)*2), Quaternion.identity);<br>
+}<br>
+}<br>
+}<br>
+if (x < 8 && x > 0 && z < 9 && z > 0 && grid[x + 1, z, 0] < 1)<br>
+{<br>
+for (int zRight = 0; zRight < 16; zRight++)<br>
+{<br>
+if (roomTypeVariation[grid[x, z, 0], 15, zRight] > 0 && roomTypeVariation[grid[x, z, 0], 15, zRight] < f)<br>
+{<br>
+//laad muren uit de lijst<br>
+Instantiate(wallTiles[1], new Vector3((15 * 8 + x * 128 - 12)*2, 0, (zRight * -8 + z * -128 + 1012)*2), Quaternion.identity);<br>
+}<br>
+}<br>
+}<br>
+//kijkt naar de X ass<br>
+if (z < 9 && z > 0 && x < 9 && x > 0 && grid[x, z - 1, 0] < 1)<br>
+{<br>
+for (int xUp = 0; xUp < 16; xUp++)<br>
+{<br>
+if (roomTypeVariation[grid[x, z, 0], xUp, 0] > 0 && roomTypeVariation[grid[x, z, 0], xUp, 0] < f)<br>
+{<br>
+//laad muren uit de lijst<br>
+Instantiate(wallTiles[1], new Vector3((xUp * 8 + x * 128 - 12)*2, 0, (0 * -8 + z * -128 + 1012)*2), Quaternion.identity);<br>
+}<br>
+}<br>
+}<br>
+if (z < 8 && z > 0 && x < 9 && x > 0 && grid[x, z + 1, 0] < 1)<br>
+{<br>
+for (int xDown = 0; xDown < 16; xDown++)<br>
+{<br>
+if (roomTypeVariation[grid[x, z, 0], xDown, 15] > 0 && roomTypeVariation[grid[x, z, 0], xDown, 15] < f)<br>
+{<br>
+//laad muren uit de lijst<br>
+Instantiate(wallTiles[1], new Vector3((xDown * 8 + x * 128 - 12)*2, 0, (15 * -8 + z * -128 + 1012)*2), Quaternion.identity);<br>
+}<br>
+}<br>
+}<br>
+//room grid<br>
+//if (grid[x, z, 0] > 0)<br>
+//{<br>
+//deze for loop kijkt naar elke locatie in een kamer en kijk of daar een blok moet staan en welk blok<br>
+for (int xInRoom = 0; xInRoom < 16; xInRoom++)<br>
+{<br>
+for (int zInRoom = 0; zInRoom < 16; zInRoom++)<br>
+{<br>
+//loads floors and floor traps and enemies<br>
+//kijkt of het een vloer tile is en laad een vloer<br>
+if (roomTypeVariation[grid[x, z, 0], xInRoom, zInRoom] > 0 && roomTypeVariation[grid[x, z, 0], xInRoom, zInRoom] < f)<br>
+{<br>
+if (startTile == true)<br>
+{<br>
+//laad een vloer uit de lijst<br>
+Instantiate(floorTiles[roomTypeVariation[grid[x, z, 0], xInRoom, zInRoom]], new Vector3((xInRoom * 8 + x * 128 - 12)*2, -8, (zInRoom * -8 + z * -128 + 1012)*2), Quaternion.identity);<br>
+<br>
+//kijkt of er een trap moet staan<br>
+if (floorTrapsVariation[grid[x, z, 1], xInRoom, zInRoom] > 0)<br>
+{<br>
+//laad een trap uit de lijst<br>
+Instantiate(floorTraps[floorTrapsVariation[grid[x, z, 1], xInRoom, zInRoom]], new Vector3((xInRoom * 8 + x * 128 - 12) * 2, -8, (zInRoom * -8 + z * -128 + 1012) * 2), Quaternion.identity);<br>
+}<br>
+//kijkt of er een vijand moet staan<br>
+if (enemieVariation[grid[x, z, 3], xInRoom, zInRoom] > 0)<br>
+{<br>
+//laad een vijand<br>
+Instantiate(enemie[enemieVariation[grid[x, z, 3], xInRoom, zInRoom]], new Vector3((xInRoom * 8 + x * 128 - 12) * 2, -3, (zInRoom * -8 + z * -128 + 1012) * 2), enemie[enemieVariation[grid[x, z, 3], xInRoom, zInRoom]].transform.rotation);<br>
+}<br>
+}<br>
+}<br>
+//loads walls and wall traps<br>
+//kijkt of er een muur moet staan<br>
+if (roomTypeVariation[grid[x, z, 0], xInRoom, zInRoom] > f && roomTypeVariation[grid[x, z, 0], xInRoom, zInRoom] < w + f + 1)<br>
+{<br>
+if (startTile == true)<br>
+{<br>
+//laad een muur uit de lijst<br>
+Instantiate(wallTiles[roomTypeVariation[grid[x, z, 0], xInRoom, zInRoom] - f], new Vector3((xInRoom * 8 + x * 128 - 12)*2, 0, (zInRoom * -8 + z * -128 + 1012)*2), Quaternion.identity);<br>
+//kijkt of er een trap moet staan<br>
+if (wallTrapsVariation[grid[x, z, 2], xInRoom, zInRoom] > 0)<br>
+{<br>
+//laad de trap uit de lijst<br>
+Instantiate(wallTraps[wallTrapsVariation[grid[x, z, 2], xInRoom, zInRoom]], new Vector3((xInRoom * 8 + x * 128 - 12) * 2, 0, (zInRoom * -8 + z * -128 + 1012) * 2), Quaternion.identity);<br>
+}<br>
+}<br>
+}<br>
+}<br>
+//}<br>
+}<br>
+}<br>
+}<br>
+}<br>
+}<br>
+// Update is called once per frame<br>
+void Update()<br>
+{<br>
+<br>
+<br>
+<br>
+}<br>
+}<br>
+<br>
+<br>
+<br>
+</p></div>
+<div class="skyblue-child"><h1>fpsScript</h1><p style="font-size: 20px;">using System.Collections;<br>
+using System.Collections.Generic;<br>
+using UnityEngine;<br>
+<br>
+<br>
+public class fpsScript : MonoBehaviour<br>
+{<br>
+// Start is called before the first frame update<br>
+void Start()<br>
+{<br>
+<br>
+<br>
+}<br>
+<br>
+<br>
+// Update is called once per frame<br>
+void Update()<br>
+{<br>
+print((int)(1.0f / Time.smoothDeltaTime) + "fps");<br>
+}<br>
+}<br>
+</p></div>
+<div class="skyblue-child"><h1>hubLoadScript</h1><p style="font-size: 20px;">using System.Collections;<br>
+using System.Collections.Generic;<br>
+using UnityEngine;<br>
+<br>
+<br>
+public class hubLoadScript : MonoBehaviour<br>
+{<br>
+//maakt lijsten waar later de blokken in worden geladen<br>
+public List<GameObject> floorTiles;<br>
+public List<GameObject> wallTiles;<br>
+//list lengt<br>
+//lengte van de lijsten<br>
+int f;<br>
+int w;<br>
+// Start is called before the first frame update<br>
+void Start()<br>
+{<br>
+//LoadHub functie<br>
+LoadHub();<br>
+}<br>
+<br>
+<br>
+public void LoadHub()<br>
+{<br>
+//de blokken worden uit folders gehaald en in de lijsten geladen<br>
+floorTiles = new List<GameObject>(Resources.LoadAll<GameObject>("FloorTiles"));<br>
+wallTiles = new List<GameObject>(Resources.LoadAll<GameObject>("WallTiles"));<br>
+//stopt de lengte van de lijsten in variabele<br>
+f = floorTiles.Count;<br>
+w = wallTiles.Count;<br>
+//dit is een 2d array van de locaties van de blokken<br>
+//alles zonder + f is een vloer alles met + f is een muur<br>
+int[,] hubMap = new int[,]<br>
+{<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 1+f, 1+f, 1+f, 1+f, 1+f, 1+f, 1+f, 1+f, 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //1<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //2<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //3<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //4<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //5<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //6<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //7<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //8<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //9<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //10<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 1+f, 1+f, 1+f, 1 , 1 , 1+f, 1+f, 1+f, 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //11<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //12<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //13<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //14<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //15<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //16<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //17<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //18<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //19<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //20<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //21<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //22<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //23<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //24<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //25<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //26<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //27<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //28<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 1+f, 1+f, 1+f, 1+f, 1+f, 1+f, 1+f, 1+f, 1+f, 1+f, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //29<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //30<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //31<br>
+{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} //32<br>
+};<br>
+//dit is een for loop die naar alle locaties in de array kijkt en daar een blok laadt<br>
+for (int xInHub = 0; xInHub < 32; xInHub++)<br>
+{<br>
+for (int zInHub = 0; zInHub < 32; zInHub++)<br>
+{<br>
+if (hubMap[xInHub, zInHub] > 0 && hubMap[xInHub, zInHub] < f)<br>
+{<br>
+//laad een vloer blok uit de lijst<br>
+Instantiate(floorTiles[hubMap[xInHub, zInHub]], new Vector3((xInHub * 8)*2, -8, (zInHub * 8)*2), Quaternion.identity);<br>
+}<br>
+if (hubMap[xInHub, zInHub] > f && hubMap[xInHub, zInHub] < w + f + 1)<br>
+{<br>
+//laad een muur blok uit de lijst<br>
+Instantiate(wallTiles[hubMap[xInHub, zInHub] - f], new Vector3((xInHub * 8)*2, 0, (zInHub * 8)*2), Quaternion.identity);<br>
+}<br>
+}<br>
+}<br>
+}<br>
+<br>
+<br>
+<br>
+<br>
+// Update is called once per frame<br>
+void Update()<br>
+{<br>
+}<br>
+}<br>
+<br>
+<br>
+<br>
+</p></div>
+<div class="skyblue-child"><h1>movementScript</h1><p style="font-size: 20px;">using System.Collections;<br>
+using System.Collections.Generic;<br>
+using UnityEngine;<br>
+<br>
+<br>
+public class movementScript : MonoBehaviour<br>
+{<br>
+//variabele voor de beweeg snelheid en sprint snelheid<br>
+public float MovementSpeed = 1;<br>
+public float SprintSpeed = 1;<br>
+// Start is called before the first frame update<br>
+void Start()<br>
+{<br>
+}<br>
+<br>
+<br>
+// Update is called once per frame<br>
+void Update()<br>
+{<br>
+//variabele voor welke toets wordt ingedrukt<br>
+float MoveXWS = 0;<br>
+float MoveXAD = 0;<br>
+float MoveZWS = 0;<br>
+float MoveZAD = 0;<br>
+//de sprint snelheid tijdens het spelen<br>
+float CurrentSprintSpeed = 0;<br>
+<br>
+//kijkt of een toets wordt ingedrukt en verandert de variabele de speler staat diagonaal in de wereld dus als je een toets voor <br>
+//beweging indrukt verandert de Z en X coördinaten<br>
+if (Input.GetKey(KeyCode.W))<br>
+{<br>
+MoveXWS = 1;<br>
+MoveZWS = 1;<br>
+}<br>
+if (Input.GetKey(KeyCode.S))<br>
+{<br>
+MoveXWS = -1;<br>
+MoveZWS = -1;<br>
+}<br>
+if (Input.GetKey(KeyCode.A))<br>
+{<br>
+MoveXAD = -1;<br>
+MoveZAD = 1;<br>
+}<br>
+if (Input.GetKey(KeyCode.D))<br>
+{<br>
+MoveXAD = 1;<br>
+MoveZAD = -1;<br>
+}<br>
+//sprint knop<br>
+if (Input.GetKey(KeyCode.LeftShift))<br>
+{<br>
+CurrentSprintSpeed = SprintSpeed;<br>
+}<br>
+//maakt een Vector 3 MoveDirecion en gebruikt die variabele om een Vector 3 TargetPosition te maken die later wordt gebruikt <br>
+//voor de beweging van de speler<br>
+Vector3 MoveDirection = new Vector3(MoveXWS + MoveXAD, 0, MoveZWS + MoveZAD).normalized;<br>
+Vector3 TargetPosition = transform.position + MoveDirection * (MovementSpeed + CurrentSprintSpeed) * Time.deltaTime;<br>
+<br>
+//gebruikt een Raycast om te kijken of daar een blok staat waar je nier doorheen kan lopen<br>
+//5 is de grootte van de speler<br>
+if (!Physics.Raycast(transform.position, MoveDirection, (MovementSpeed + CurrentSprintSpeed) * Time.deltaTime + 5))<br>
+{<br>
+//verandert de positie van de speler naar TargetPosition<br>
+transform.position = TargetPosition;<br>
+}<br>
+else<br>
+{<br>
+<br>
+<br>
+}<br>
+}<br>
+}<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p></div>
+<div class="skyblue-child"><h1>petPathfinding</h1><p style="font-size: 20px;">using System.Collections;<br>
+using System.Collections.Generic;<br>
+using UnityEngine;<br>
+<br>
+<br>
+public class petPathfinding : MonoBehaviour<br>
+{<br>
+//variabele voor de snelheid van de pet de positie tot de speler en hoe ver de pet moet zijn om de speler te zien<br>
+public int petSpeed;<br>
+public int detectDistance;<br>
+float deltaPosX;<br>
+float deltaPosZ;<br>
+// Start is called before the first frame update<br>
+void Start()<br>
+{<br>
+<br>
+<br>
+}<br>
+<br>
+<br>
+// Update is called once per frame<br>
+void Update()<br>
+{<br>
+//zoekt een object met de naam speler en berekent de aftand tussen de speler en zichzelf<br>
+GameObject Player = GameObject.Find("player");<br>
+deltaPosX = transform.position.x - Player.transform.position.x;<br>
+deltaPosZ = transform.position.z - Player.transform.position.z;<br>
+<br>
+//gebruikt code van pickels <br>
+if (deltaPosX > -detectDistance && deltaPosX < detectDistance && deltaPosZ > -detectDistance && deltaPosZ < detectDistance && float.IsNaN(FlowFieldProvider.GetVector(transform.position).x) == false && float.IsNaN(FlowFieldProvider.GetVector(transform.position).y) == false && float.IsNaN(FlowFieldProvider.GetVector(transform.position).z) == false)<br>
+{<br>
+//gebruikt de FlowFieldProvider om een Vector3 direction te maken<br>
+Vector3 direction = FlowFieldProvider.GetVector(transform.position);<br>
+//vermenigvuldigt direction met petSpeed en teld dat bij de positie van de pet op<br>
+transform.position = transform.position + direction * petSpeed / 10;<br>
+}<br>
+}<br>
+}<br>
+<br>
+</p></div>
+<div class="skyblue-child"><h1>playerLoader</h1><p style="font-size: 20px;">using System.Collections;<br>
+using System.Collections.Generic;<br>
+using UnityEngine;<br>
+<br>
+<br>
+public class playerLoader : MonoBehaviour<br>
+{<br>
+bool done = false;<br>
+public List<GameObject> Player;<br>
+// Start is called before the first frame update<br>
+void Start()<br>
+{<br>
+Player = new List<GameObject>(Resources.LoadAll<GameObject>("DebugTiles"));<br>
+}<br>
+<br>
+<br>
+// Update is called once per frame<br>
+void Update()<br>
+{<br>
+if (Time.time > 3 && !done)<br>
+{<br>
+Instantiate(Player[2], new Vector3(250, 0, 150), Quaternion.identity);<br>
+done = true;<br>
+}<br>
+}<br>
+}<br>
+<br>
+<br>
+</p></div>
+<div class="midnightblue-child5">
+<div class="red-child-3">
+<a href='soulbreaker.html' style="color: #eac580"><h1>terug</h1></a>
+</div>
+<div class="red-child-5">
+<a href='music.html' style="color: #eac580"><h1>muziek</h1></a>
+</div>
+</div>
+</div>
+</div>
+</ul>
+</nav> 
+</body>
+</html>

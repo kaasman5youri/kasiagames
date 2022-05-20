@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>kasia games</title>
+<link href ="playerbase.css" rel="stylesheet">
+</head>
+<style>
+body {
+    background-size: cover;
+    background-color: #1e3139;
+}
+</style>
+<nav>
+<ul>
+<div class="container">
+<div class="child red-child">
+<h1> </h1>
+</div>
+</div>
+<div class="container0">
+<div class="child red-child0">
+<div class="kasiagamestext0">
+<h1> </h1>
+</div>
+</div>
+</div>
+<div class="container1">
+<div class="red-child2">
+</div>
+<div class="steelblue-child">
+<a href='menu.html' style="color: #eac580"><h1>home</h1></a>
+</div>
+<div class="steelblue-child">
+<a href='games.html' style="color: #eac580"><h1> games</h1></a>
+</div>
+<div class="steelblue-child">
+<a href='https://www.kaas.nl/' style="color: #eac580"><h1> kaas.nl</h1></a>
+</div>
+<div class="steelblue-child-2">
+<a href='soulbreaker.html' style="color: #eac580"><h1>soulbreaker informatica opdracht vwo 5 p1 p2</h1></a>
+</div>
+</div>
+<div class="container2">
+<div class="midnightblue-child4">
+<h1>Speler<br><br>Hoe ziet de speler eruit?</h1><p style="font-size: 20px">De speler heeft zwart haar, een rood shirt en een bruine broek. Jesper heeft de sprites voor de speler gemaakt. Er zijn verschillende sprites die worden gebruikt voor animaties. Hieronder kan je die sprites zien.</p><div class="midnightblue-child5"><div class="white-child"><img id="a0"></div><div class="white-child"><img id="a1"></div><div class="white-child"><img id="a2"></div><div class="white-child"><img id="a3"></div><div class="white-child"><img id="a4"></div></div><h2>Hoe beweegt de speler en hoe werkt de collision?</h2><p style="font-size: 20px">De speler gebruikt "wasd" om te bewegen. De camera staat scheef dus als beweegt verandert de x en z waarde tegelijkertijd. Dit kan je zien in de afbeelding hieronder. Geel is de camera, groen is de speler en rood is waar hij naartoe beweegt als je de toets indrukt.</p><div class="white-child"><img id="a5"></div><p style="font-size: 20px">Voor de collision worden raycasts gebruikt. Een raycast maakt een lijn vanaf speler naar een bepaalde richting en als de raycast merkt dat er iets in die richting staat dan kan de speler daar niet naar toe bewegen. De speler heeft collision met voor vijanden en muren maar niet voor huisdieren. In de afbeelding hieronder kan je zien waar hij naar toe kan bewegen als hij bij een muur staat. De blauwe vakken zijn muren en als de pijl geel is kan hij daar niet naartoe bewegen.</p><div class="white-child"><img id="a6"></div><h3 style="font-size: 25px">Powerups en aanvallen</h3><p style="font-size: 20px">We waren van plan om de speler meerdere powerups en aanvallen te geven maar we hebben dat niet op tijd af gekregen. Ferre heeft een lijst gemaakt van verschillende powerups en aanvallen het staat in het engels. Die lijst staat hieronder.</p><div class="midnightblue-child5"><div class="midnightblue-child6"></div><div class="#eac580-child"><h1>Temporary upgrades<br>
+Melee<br>
+Ranged<br>
+Magic<br>
+Defensive<br>
+Movement<br>
+<br>
+Active<br>
+Mechanics: Functions via a cooldown system (mage is an exception, functions via mana.). Cooldowns do not go down unless the player is in combat. (Prevents repeated use of “Medical Supply” between rooms)<br>
+<br>
+Melee:<br>
+-Melee skills are special in that they do not have a cooldown but instead require a specific action from the player to use.<br>
+-Cyclone Blade: After holding down the attack button for 2 seconds the player spins around 	with their weapon causing everything in a medium area around the player to take damage	that scales with the players’ strength stat.<br>-Spatial Awareness: The player must stand still before using this attack. When the user 	presses the attack button after having stood still the player delivers a quick attack to every	enemy in a certain area, which grows the longer the user stands still.<br>
+-Blade Flurry: If the player presses the attack button while in the dash animation and the 	player bumps into an enemy while dashing, the player will deliver 5 strikes to that enemy.<br>
+<br>
+Ranged:<br>
+-Hunting Target: After pressing this ability the players next ranged projectile will apply a 	target to the enemy it hits, which increases damage dealt to that enemy by 1,5 times, but will	decrease damage dealt to every other enemy by 0,8 times until the targeted enemy dies.<br>-A Helping Hand: For 10 seconds the user fires an extra projectile every 3 shots.<br>-Hell Rain: The user fires projectiles into the air and creates a damage over time area where 	the projectiles rain down.<br>
+<br>
+Magic:<br>
+(Mage has 5 spells, gets 2 random spells when starting a run and can at maximum have 3 	spells. If the mage is offered a spell when they have 3 already they can choose to exchange 	one of their spells.)<br>
+-Kagutsuchi’s Fury: Player fires a big ball of fire forward which explodes on contact with an enemy and deals massive AoE damage. (High mana cost)<br>
+-Raijin’s Bolt: Player fires a low-medium damage lightning bolt that jumps between enemies up to a maximum of 4 enemies. (Low mana cost)<br>-Fujin’s Gust: Player releases a blast of wind dealing medium damage and knocking non-boss enemies back. If an enemy hits the wall they take extra damage. (Medium mana cost)<br>-Kuraokami’s Domain: Player creates an area of ice in which enemies will take low chip damage and will be slowed/frozen. (Medium mana cost)<br>-Ninigi’s Fist: Player creates a giant fist-shaped rock around their hand and punches forward dealing big close-range damage. (Medium mana cost)<br><br>Defensive:<br>-Parrying Stance: After using this ability the user will take a defensive stance for 1 second. If the user is hit during that second they appear behind the enemy that hit them and deal a powerful strike scaling with strength (not reccomended for mage/ranged builds).<br>-Heroic Determination: Player gains a shield that reduces damage taken by 33% for 10 seconds.<br>
+-Medical Supply: Heals the player for 25% of their max health. Long cooldown.<br><br>Movement:<br>-Strange Device: Changes your Dash into a teleport for 10 seconds. (Blade Flurry skill is unusable when this is active.)<br>-Agil-Pill: Movement Speed increases by 33% for 10 seconds.<br>-Reposition: Teleport back to the middle of the room upon use.<br><br>Passive<br><br>Melee:<br>-Bloodlust: When an enemy is killed with a melee attack the players’ strength stat increases for 3 seconds.<br>-Glass Cannon: Strength increases drastically, but the player loses 66% of their max health.<br>-Empowered: The players’ strength increases by a small amount. (This upgrade can be found and picked up up to 3 times.<br><br>Ranged:<br>-Sniper: Damage and projectile speed increase dramatically, but firerate is lowered.<br>-Trigger Finger: Firerate gets boosted, but projectile spread is increased a lot.<br>-Fast Hands: Dexterity stat increase (can be stacked up to 3 times)<br>
+<br>
+Magic:<br>
+-Overcast: Great magic damage increase, but mana cost increases.<br>
+-Absorb mana: Recover your mana by getting close to an enemy.<br>
+-Bookworm: Intelligence stat increase (can be stacked up to 3 times)<br><br>Defensive:<br>
+-Tank: Health increase at the cost of lowered movement.<br>
+-Blessed Aura: The damage from the first hit you take per 3 rooms is negated.<br>-Mitotic Regen: Health regen boost (can be stacked up to 3 times)<br>
+<br>
+Movement:<br>
+-Sprinter: Dash distance increases by 33%.<br>
+-Agile n Fragile: Movement speed increases a good amount, 10% chance to dodge damage	 from an attack. Health lowered drastically.<br>
+-Strong Legs: Small movement speed increase. (can be stacked up to 3 times) </h1></div><div class="midnightblue-child6"></div></div>
+<div class="midnightblue-child5">
+<div class="red-child-3">
+<a href='soulbreaker.html' style="color: #eac580"><h1>terug</h1></a>
+</div>
+<div class="red-child-5">
+<a href='Enemies.html' style="color: #eac580"><h1>vijanden</h1></a>
+</div>
+<div class="red-child-3">
+<a href='textures.html' style="color: #eac580"><h1>textures</h1></a>
+</div>
+</div>
+</div>
+</div>
+</ul>
+</nav> 
+</body>
+</html>

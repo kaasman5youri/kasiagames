@@ -1,0 +1,1066 @@
+
+.container {
+    z-index: 2;
+    position: fixed;
+    top:0px;
+    min-height: 60px;
+    max-height: 10vh;
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #1e3139;
+}
+.red-child{
+    display: flex;
+    flex: 1;
+    height: 75px;
+    width: 100vw;
+    color: #eac580;
+    background-color:#1e3139;
+}
+
+.kasiagamestext{
+    display: flex;
+    height: 60px;
+    width: 800px;
+    image-rendering: pixelated;
+    background: url(image/kasiaGamesText.png);
+    background-size: cover;
+}
+.container0 {
+    z-index: 2;
+    position: sticky;
+    top:0px;
+    min-height: 60px;
+    max-height: 10vh;
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #1e3139;
+}
+.red-child0{
+    display: flex;
+    flex: 1;
+    height: 75px;
+    width: 100vw;
+    color: #eac580;
+    background-image:linear-gradient(#1e3139,#1e3139)
+}
+.kasiagamestext0{
+    display: flex;
+    height: 60px;
+    width: 800px;
+    image-rendering: pixelated;
+    background: url(image/kasiaGamesText.png);
+    background-size: cover;
+}
+.container1 {
+    height: 50px;
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: flex-start;
+    background-color: #1e3139;
+}
+.red-child2{
+    display: flex;
+    height: 50px;
+    width: 20px;
+    background-color: #1e3139;
+}
+.red-child-3{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    vertical-align: top;
+    align-content: center;
+    height: 50px;
+    width: 10vw;
+    min-width: 75px;
+    color: black;
+    font-size-adjust: auto;
+    justify-content: center;
+    background-color: #b94545;
+}
+.red-child-3:hover{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    align-content: center;
+    height: 50px;
+    width: 10vw;
+    min-width: 75px;
+    color: black;
+    font-size-adjust: auto;
+    transition-duration: 0.6s;
+    justify-content: center;
+    background-color: #086880;
+    transform: scaleX(1.05);
+}
+.red-child-4{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    vertical-align: top;
+    align-content: center;
+    height: 50px;
+    width: 10vw;
+    min-width: 75px;
+    color: black;
+    font-size-adjust: auto;
+    justify-content: center;
+    background-color: #1e3139;
+}
+.red-child-5{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    vertical-align: top;
+    align-content: center;
+    height: 50px;
+    width: 200px;
+    color: black;
+    font-size-adjust: auto;
+    justify-content: center;
+    background-color: #b94545;
+}
+.red-child-5:hover{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    align-content: center;
+    height: 50px;
+    width: 200px;
+    color: black;
+    font-size-adjust: auto;
+    transition-duration: 0.6s;
+    justify-content: center;
+    background-color: #086880;
+    transform: scaleX(1.05);
+}
+.midnightblue-child{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    display: flex;
+    align-content: center;
+    height: 50px;
+    width: 10vw;
+    min-width: 75px;
+    color: #1F79AD;
+    font-size-adjust: auto;
+    justify-content: center;
+    background-color: #1e3139;
+}
+.midnightblue-child-2{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    display: flex;
+    align-content: center;
+    height: 50px;
+    width: 50vw;
+    min-width: 75px;
+    color: #eac580;
+    font-size-adjust: auto;
+    justify-content: center;
+    background-color: #1e3139;
+}
+.midnightblue-child5{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    height: auto;
+    width: 90vw;
+    color: #eac580;
+    background-color: #8a2223;     
+}
+.steelblue-child{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    display: flex;
+    align-content: center;
+    height: 50px;
+    width: 10vw;
+    min-width: 75px;
+    font-size-adjust: auto;
+    justify-content: center;
+    background-color: #b94545;
+}
+.steelblue-child:hover{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    display: flex;
+    align-content: center;
+    height: 50px;
+    width: 10vw;
+    min-width: 75px;
+    font-size-adjust: auto;
+    justify-content: center;
+    transition-duration: 0.6s;
+    background-color: #086880;
+    transform: scaleX(1.05);
+}
+.steelblue-child-2{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    display: flex;
+    align-content: center;
+    height: 50px;
+    width: 50vw;
+    min-width: 75px;
+    font-size-adjust: auto;
+    justify-content: center;
+    background-color: #b94545;
+}
+.steelblue-child-2:hover{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    display: flex;
+    align-content: center;
+    height: 50px;
+    width: 50vw;
+    min-width: 75px;
+    font-size-adjust: auto;
+    justify-content: center;
+    transition-duration: 0.6s;
+    background-color: #086880;
+    transform: scaleX(1.05);
+}
+.container2 {
+    height: auto;
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: flex-start;
+    background-color: #1e3139;
+}
+.midnightblue-child2{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    height: auto;
+    width: 90vw;
+    color: #eac580;
+    background-color: #8a2223;     
+}
+.midnightblue-child3{
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    height: 25px;
+    width: 90vw;
+    background-color: #8a2223; 
+}
+.midnightblue-child4{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    height: auto;
+    width: 90vw;
+    color: #eac580;
+    background-color: #8a2223;     
+}
+.white-child{
+    display: flex;
+    height: 35vw;
+    width: 35vw;
+    max-height: 300px;
+    max-width: 300px;
+    background-color: ghostwhite;
+}
+#kaas {
+    background: url(image/kasia%20kaas.jpg);
+    background-size: contain;
+    width: 35vw;
+    height: 35vw;
+    max-height: 300px;
+    max-width: 300px;
+}
+#kaas:hover {
+    transition-duration: 1s;
+    background: url(image/kasia%20play.jpg);
+    background-size: contain;
+    width: 35vw;
+    height: 35vw;
+    max-height: 300px;
+    max-width: 300px;
+}
+#hamster {
+    background-image: url(image/hamster%201.png);
+    background-size: contain;
+    width: 35vw;
+    height: 35vw;
+    max-height: 300px;
+    max-width: 300px;
+}
+#hamster:hover {
+    transition-duration: 1s;
+    background: url(image/hamster%20play.png);
+    background-size: contain;
+    width: 35vw;
+    height: 35vw;
+    max-height: 300px;
+    max-width: 300px;
+}
+#kip {
+    background-image: url(image/kip.jpg);
+    background-size: contain;
+    width: 35vw;
+    height: 35vw;
+    max-height: 300px;
+    max-width: 300px;
+}
+#kip:hover {
+    transition-duration: 1s;
+    background: url(image/kip%20%20play.jpg);
+    background-size: contain;
+    width: 35vw;
+    height: 35vw;
+    max-height: 300px;
+    max-width: 300px;
+}
+.white-child-2{
+    display: flex;
+    flex-direction: row;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    height: 150px;
+    width: 150px;
+    background-color: white;
+}
+#a1 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background: url(textures/aim%20reticle%20texture.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a2 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/blue%20slime%20enemy.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a3 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/boss%20health%20bar.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a4 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background: url(textures/crystal%20coin%20texture.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a5 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/dog%20with%20hat%20texture.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a6 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/floor%20edge.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a7 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background: url(textures/hub%20door%20texture.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a8 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/hub%20floor%20texture.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a9 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/hub%20puching%20bag.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a10 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/hub%20wall%20texture.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a11 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background: url(textures/jungle%20cobble%20stone%20wall%20texture.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a12 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/jungle%20dirt%20ground%2016x16.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a13 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/jungle%20dirt%20ground%20texture.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a14 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background: url(textures/jungle%20stone%20wall%20texture.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a15 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/kaas%20pet%20texture.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a16 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/player%20health%20bar%20texture.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a17 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background: url(textures/robot%20pet%20texture.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a18 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/spike%20trap.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a19 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/stone%20wall%20texture.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a20 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/temp-mel-upg-tmpl2.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a21 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background: url(textures/temp-mvm-upg=tmpl.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a22 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/water%20texture.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a23 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/back-player-walk-f1.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a24 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/Basic%20player%20base%20design.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a25 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/Basic%20player%20design%20back%20V1.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a26 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background: url(textures/Basic%20player%20design.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a27 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/Coin%20Counter%20templ.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a28 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/Crystal-Coin-5.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a29 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/Crystal-Coin-10.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a30 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background: url(textures/Crystal-Coin-15.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a31 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/Crystal-coin-30.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a32 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/front-player-transparent.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a33 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/front-player-walk-f1.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a34 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background: url(textures/cactus%20arrow.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a35 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/cactus%20blade.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a36 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background: url(textures/cactus%20bow%20body.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a37 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/cactus%20bow%20string.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a38 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/cactus%20bow.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a39 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/cactus%20shuriken.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a40 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background: url(textures/cactus%20sword%20gaurd.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a41 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/cactus%20sword%20handle.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a42 {
+	 border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/cactus%20sword.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a43 {
+	 border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url("textures/cactus-active%20walking%20frame%202.png");
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a44 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background: url(textures/cactus-active%20walking%20frame%201.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a45 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/cactus-active%20walking%20frame%203.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a46 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background: url(textures/cactus-active%20attack%20frame.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a47 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/cactus-passive.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a48 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/ExplosiveCactusArrow.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a49 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/robot%20cactus%20walking%20frame%201.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a50 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background: url(textures/robot%20cactus%20walking%20frame%202.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a51 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/robot%20cactus%20attack%20frame%201.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a52 {
+	 border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/robot%20cactus%20attack%20frame%202.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a53 {
+	 border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url("textures/small%20explosive%20cactus%20attack%20frame.png");
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a54 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background: url(textures/small%20explosive%20cactus%20walking%20frame%201.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a55 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/small%20explosive%20cactus%20walking%20frame%202.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a56 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background: url(textures/small%20explosive%20cactus%20walking%20frame%203.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a57 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/Slime%20Blade.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a58 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/Slime%20Guard.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a59 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/Slime%20Handle.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a60 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background: url(textures/Slime%20Sword.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a61 {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/wood%20texture%20basic.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a62 {
+	 border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/cactus-passive.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a63 {
+	 border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url("textures/cactus-active%20walking%20frame%202.png");
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}
+#a64 {
+	 border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    image-rendering: pixelated;
+    background-image: url(textures/Slime%20Bow&20Body.png);
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+}

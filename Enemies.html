@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>kasia games</title>
+<link href ="enemiesbase.css" rel="stylesheet">
+</head>
+<style>
+body {
+    background-size: cover;
+    background-color: #1e3139;
+}
+</style>
+<nav>
+<ul>
+<div class="container">
+<div class="child red-child">
+<h1> </h1>
+</div>
+</div>
+<div class="container0">
+<div class="child red-child0">
+<div class="kasiagamestext0">
+<h1> </h1>
+</div>
+</div>
+</div>
+<div class="container1">
+<div class="red-child2">
+</div>
+<div class="steelblue-child">
+<a href='menu.html' style="color: #eac580"><h1>home</h1></a>
+</div>
+<div class="steelblue-child">
+<a href='games.html' style="color: #eac580"><h1> games</h1></a>
+</div>
+<div class="steelblue-child">
+<a href='https://www.kaas.nl/' style="color: #eac580"><h1> kaas.nl</h1></a>
+</div>
+<div class="steelblue-child-2">
+<a href='soulbreaker.html' style="color: #eac580"><h1>soulbreaker informatica opdracht vwo 5 p1 p2</h1></a>
+</div>
+</div>
+<div class="container2">
+<div class="midnightblue-child4">
+<h1>Vijanden<br><br>Welke soort vijanden zijn er en wat doen ze?</h1><p style="font-size: 20px">Er zijn niet veel verschillende soorten vijanden. Er zijn nu nog maar vier vijanden (een blauwe slime, een levende cactus, een robot cactus en een kleine explosieve cactus) en een eindbaas (een schorpioen (concept art, wordt verbeterd) die je hieronder kan zien.
+</p><div class="midnightblue-child5">
+<div class="white-child"><img id="a5"></div>
+<div class="white-child"><img id="a6"></div>
+<div class="white-child"><img id="a21"></div>
+<div class="white-child"><img id="a22"></div>
+<div class="white-child"><img id="a23"></div>
+<p style="font-size: 20px">De vijanden hebben verschillende aanvallen. De slime loopt naar de speler toe en valt aan, de cactus gooit dingen naar de speler, de explosieve cactus loopt naar de speler toe en explodeert en de robot cactus valt aan met machine geweren.
+
+</div> <p style="font-size: 20px">Het idee was dat de vijanden met een flowfield naar de speler toe gingen om de speler aan te vallen. De vijanden kunnen nog niet aanvallen maar de pathfinding werkt wel. De pathfinding wordt ook gebruikt door Huisdieren. We waren van plan om de eindbaas een eigen kamer te geven waar hij je ging aanvallen en waar je hem kan verslaan maar we hebben dit niet af gekregen. Ook hadden we het idee dat je geld krijgt als je een vijand verslaat. Dat geld kan je dan gebruiken om nieuwe wapens te kopen hieronder staat het geld en hoeveel ze waard zijn.</p><div class="midnightblue-child5"><div class="white-child"><img id="a0"><h1>1</h1></div><div class="white-child"><img id="a1"><h1>5</h1></div><div class="white-child"><img id="a2"><h1>10</h1></div><div class="white-child"><img id="a3"><h1>15</h1></div><div class="white-child"><img id="a4"><h1>30</h1></div></div><h2>Welke huisdieren zijn er?</h2><p style="font-size: 20px">Er zijn drie verschillende soorten huisdieren. er is een hond met een hoed, een stuk kaas met een gezicht en benen en een robot. In de game zien ze er leuk uit en volgen ze de speler verder doen ze niks. De huisdieren gebruiken dezelfde pathfinding als de vijanden. Hieronder kan je zien hoe de huisdieren eruit zien.</p><div class="midnightblue-child5"><div class="white-child"><img id="a7"></div><div class="white-child"><img id="a8"></div>
+<div class="white-child"><img id="a9"></div></div>
+<h3>Hoe werkt de pathfinding?</h3><p style="font-size: 20px">Ik heb de code voor de pathfinding niet zelf gemaakt maar ik denk dat ik ongeveer weet hoe het werkt. Ik heb gekozen voor pathfinding met een flowfield omdat ik veel vijanden in een level wil. Ik gebruik een grid om uit te leggen hoe de pathfinding werkt. Het groene vakje is de speler en de rode vakjes zijn muren.<div class="midnightblue-child5"><div class="white-child2"><img id="a11"></div></div><p style="font-size: 20px">Hij begint bij de speler met een waarde van 1 en doet dan een floodfill waarbij hij kijkt naar de vakjes naast de speler en ze een waarde geeft die 1 hoger is 2. Daarna gaat hij naar de vakjes met de waarde van 2 en  kijkt hij naar de vakjes die daar naast staan en geeft ze een waarde die 1 hoger is dan 3. Dit word herhaald totdat de hele grid vol zit.</p><div class="midnightblue-child5"><div class="white-child2"><img id="a12"></div><div class="white-child2"><img id="a13"></div><div class="white-child2"><img id="a14"></div></div><p style="font-size: 20px">Daarna worden er vectoren gemaakt die beginnen bij het midden van het vakje met de hoogste waarde en wijzen naar het vakje met de laagste waarde die er naast staat.</p><div class="midnightblue-child5"><div class="white-child2"><img id="a15"></div><div class="white-child2"><img id="a16"></div></div><p style="font-size: 20px">Als een vijand in de grid staat kijkt hij op welk vakje hij staat en telt hij de waardes van de vector op bij zijn positie waardoor hij naar de speler beweegt. De zwarte lijn is de route die hij neemt.</p><div class="midnightblue-child5"><div class="white-child2"><img id="a17"></div><div class="white-child2"><img id="a18"></div><div class="white-child2"><img id="a19"></div><div class="white-child2"><img id="a20"></div></div><p style="font-size: 20px">Hieronder kan je een video zien van de vijanden in de game.</p>
+<video width="480px" height="320px" controls>
+<source src="videos/enemiesInGame.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<p style="font-size: 20px">Ik heb de code voor de pathfinding niet zelf gemaakt. Pickles796 heeft de code gemaakt.</p><div class="midnightblue-child5"><div class="red-child-5"><a href="https://github.com/pickles976/UnityFlowField" style="color: #eac580"><h1>code pickles976</h1></a></div></div>
+<div class="midnightblue-child5">
+<div class="red-child-3">
+<a href='soulbreaker.html' style="color: #eac580"'><h1>terug</h1></a>
+</div>
+<div class="red-child-5">
+<a href="Level%20Generation.html" style="color: #eac580"><h1>level generatie</h1></a>
+</div>
+<div class="red-child-3">
+<a href="Player%20character.html" style="color: #eac580"><h1>speler</h1></a>
+</div>
+</div>
+</div>
+</div>
+</ul>
+</nav> 
+</body>
+</html>
